@@ -69,6 +69,9 @@ orml-vesting = { default-features = false, git = "https://github.com/ajuna-netwo
 ajuna-primitives             = { default-features = false, path = "../../primitives" }
 pallet-ajuna-awesome-avatars = { default-features = false, path = "../../pallets/ajuna-awesome-avatars" }
 
+# Kelvin pallets
+gamestate = { default-features = false, path = "../../pallets/gamestate" }
+
 [features]
 default = [ "std" ]
 runtime-benchmarks = [

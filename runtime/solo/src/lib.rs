@@ -68,6 +68,9 @@ use consts::{currency::*, time::*};
 use impls::{CreditToTreasury, NegativeImbalanceToTreasury, OneToOneConversion};
 use types::governance::*;
 
+// Kelvin imports
+use gamestate;
+
 // Some public reexports..
 pub use frame_system::Call as SystemCall;
 pub use pallet_balances::Call as BalancesCall;
@@ -567,6 +570,13 @@ impl pallet_preimage::Config for Runtime {
 	type ByteDeposit = ByteDeposit;
 }
 
+impl gamestate::Config for Runtime {
+    //type RuntimeEvent = RuntimeEvent;
+    type Currency = Balances;
+    type CollectionRandomness = Randomness;
+    type MaximumOwned = frame_support::pallet_prelude::ConstU32<100>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -596,6 +606,7 @@ construct_runtime!(
 		PreImage: pallet_preimage = 19,
 		AwesomeAvatars: pallet_ajuna_awesome_avatars = 22,
 		Randomness: pallet_randomness_collective_flip = 23,
+		Gamestate: gamestate = 24,
 	}
 );
 
