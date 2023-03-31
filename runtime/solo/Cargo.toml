@@ -73,6 +73,9 @@ pallet-ajuna-awesome-avatars = { default-features = false, path = "../../pallets
 pallet-ajuna-nft-staking     = { default-features = false, path = "../../pallets/ajuna-nft-staking" }
 pallet-ajuna-nft-transfer    = { default-features = false, path = "../../pallets/ajuna-nft-transfer" }
 
+# Kelvin pallets
+gamestate = { default-features = false, path = "../../pallets/gamestate" }
+
 [features]
 default = [ "std" ]
 runtime-benchmarks = [
@@ -136,4 +139,5 @@ std = [
     "pallet-ajuna-awesome-avatars/std",
     "pallet-ajuna-nft-staking/std",
     "pallet-ajuna-nft-transfer/std",
+    "gamestate/std",
 ]

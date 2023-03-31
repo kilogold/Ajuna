@@ -69,6 +69,10 @@ use impls::{CreditToTreasury, NegativeImbalanceToTreasury, OneToOneConversion};
 use pallet_nfts::Call as NftsCall;
 use types::governance::*;
 
+// Kelvin imports
+use gamestate;
+
+// Some public reexports..
 pub use frame_system::Call as SystemCall;
 pub use pallet_balances::Call as BalancesCall;
 pub use pallet_timestamp::Call as TimestampCall;
@@ -631,6 +635,13 @@ impl pallet_ajuna_nft_transfer::Config for Runtime {
 	type NftHelper = Nft;
 }
 
+impl gamestate::Config for Runtime {
+    //type RuntimeEvent = RuntimeEvent;
+    type Currency = Balances;
+    type CollectionRandomness = Randomness;
+    type MaximumOwned = frame_support::pallet_prelude::ConstU32<100>;
+}
+
 // Create the runtime by composing the FRAME pallets that were previously configured.
 construct_runtime!(
 	pub enum Runtime where
@@ -662,6 +673,7 @@ construct_runtime!(
 		Randomness: pallet_randomness_collective_flip = 23,
 		Nft: pallet_nfts = 24,
 		NftTransfer: pallet_ajuna_nft_transfer = 25,
+		Gamestate: gamestate = 26,
 	}
 );
 
