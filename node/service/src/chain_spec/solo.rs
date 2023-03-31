@@ -18,7 +18,7 @@ use crate::chain_spec::{chain_spec_properties, get_well_known_accounts};
 use ajuna_primitives::Balance;
 use ajuna_solo_runtime::{
 	currency::AJUNS, AssetsConfig, AuraConfig, BalancesConfig, CouncilConfig, GenesisConfig,
-	GrandpaConfig, SudoConfig, SystemConfig, VestingConfig, WASM_BINARY,
+	GrandpaConfig, SudoConfig, SystemConfig, VestingConfig, GamestateConfig, WASM_BINARY,
 };
 use sc_service::ChainType;
 
@@ -74,6 +74,7 @@ struct Config {
 	balances: BalancesConfig,
 	assets: AssetsConfig,
 	vesting: VestingConfig,
+	gamestate: GamestateConfig
 }
 
 fn development_config_genesis() -> GenesisConfig {
@@ -129,6 +130,8 @@ fn development_config_genesis() -> GenesisConfig {
 				cliff_vest_ferdie_at_30,
 			],
 		},
+		gamestate: GamestateConfig{
+		},
 	})
 }
 
@@ -178,6 +181,8 @@ fn testnet_config_genesis() -> GenesisConfig {
 		},
 		assets: AssetsConfig::default(),
 		vesting: VestingConfig::default(),
+		gamestate: GamestateConfig{
+		},
 	})
 }
 
@@ -186,7 +191,7 @@ fn compose_genesis_config(config: Config) -> GenesisConfig {
 	let wasm_binary = WASM_BINARY.expect(
 		"Development wasm binary is not available. Please rebuild with SKIP_WASM_BUILD disabled.",
 	);
-	let Config { aura, grandpa, sudo, council, balances, assets, vesting } = config;
+	let Config { aura, grandpa, sudo, council, balances, assets, vesting, gamestate } = config;
 	GenesisConfig {
 		// overridden config
 		aura,
@@ -196,6 +201,7 @@ fn compose_genesis_config(config: Config) -> GenesisConfig {
 		balances,
 		assets,
 		vesting,
+		gamestate,
 		// default config
 		system: SystemConfig { code: wasm_binary.to_vec() },
 		transaction_payment: Default::default(),

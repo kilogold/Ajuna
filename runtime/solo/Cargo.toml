@@ -130,4 +130,5 @@ std = [
     "sp-version/std",
     "orml-vesting/std",
     "pallet-ajuna-awesome-avatars/std",
+    "gamestate/std",
 ]
