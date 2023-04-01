@@ -636,10 +636,10 @@ impl pallet_ajuna_nft_transfer::Config for Runtime {
 }
 
 impl gamestate::Config for Runtime {
-    //type RuntimeEvent = RuntimeEvent;
+    type RuntimeEvent = RuntimeEvent;
     type Currency = Balances;
     type CollectionRandomness = Randomness;
-    type MaximumOwned = frame_support::pallet_prelude::ConstU32<100>;
+    type MaxPlayerPerSession = frame_support::pallet_prelude::ConstU32<2>;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
