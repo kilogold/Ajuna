@@ -22,6 +22,8 @@ pub mod pallet {
 	#[pallet::genesis_build]
 	impl<T: Config> GenesisBuild<T> for GenesisConfig {
 		fn build(&self) { 
+			// Reserve zero-index for uninitialized defaults.
+			UuidGenerationCount::<T>::set(1);
 		}
 	}
 
